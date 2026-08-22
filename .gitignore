@@ -1,0 +1,30 @@
+# IDEs e Editores
+.idea/
+*.iws
+*.iml
+*.ipr
+.vscode/
+.classpath
+.project
+.settings/
+.sts4-cache
+
+# Frontend (Node / React / Vite)
+node_modules/
+dist/
+dist-ssr/
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Backend (Java / Spring Boot / Maven)
+target/
+uploads/
+deploy.zip
+HELP.md
+.mvn/wrapper/maven-wrapper.jar
+
+# Sistema Operacional
+.DS_Store
+Thumbs.db
