@@ -1,200 +1,287 @@
 <div align="center">
-  <img src="docs/logo.svg" alt="Cloud Box" width="120" />
 
-  # Cloud Box
+# ✂️ CorteSync — Front-end
 
-  ### Seus arquivos, sempre à mão.
+**Sistema web de agendamento para barbearias.**
+Clientes marcam horários online, barbeiros acompanham a própria agenda e o administrador gerencia toda a operação.
 
-  Sistema de armazenamento de arquivos em nuvem, full-stack — API REST em
-  Spring Boot e frontend em React, hospedados na AWS. Upload, listagem,
-  renomeação e exclusão de arquivos com autenticação JWT.
+[![Demo online](https://img.shields.io/badge/demo-online-D4A94A?style=for-the-badge)](http://52.207.33.184:3000)
 
-  ![Java](https://img.shields.io/badge/Java-21-orange?logo=openjdk&logoColor=white)
-  ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3-brightgreen?logo=springboot&logoColor=white)
-  ![Spring Security](https://img.shields.io/badge/Spring%20Security-JWT-6DB33F?logo=springsecurity&logoColor=white)
-  ![MySQL](https://img.shields.io/badge/MySQL-RDS-4479A1?logo=mysql&logoColor=white)
-  ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)
-  ![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)
-  ![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-4-38BDF8?logo=tailwindcss&logoColor=white)
-  ![AWS](https://img.shields.io/badge/AWS-S3%20%7C%20CloudFront%20%7C%20Elastic%20Beanstalk-FF9900?logo=amazonaws&logoColor=white)
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)
+![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?logo=tailwindcss&logoColor=white)
+![React Router](https://img.shields.io/badge/React_Router-7-CA4245?logo=reactrouter&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-Nginx-2496ED?logo=docker&logoColor=white)
 
-## ☁️ Projeto rodando na nuvem
-  [Demo ao vivo na AWS](https://d1k6x7zqjed6oi.cloudfront.net)
+[Demonstração](#demonstração) ·
+[Telas](#telas) ·
+[Funcionalidades](#funcionalidades) ·
+[Tecnologias](#tecnologias) ·
+[Como executar](#como-executar) ·
+[Docker](#docker) ·
+[API](#endpoints-da-api-utilizados)
+
 </div>
 
 ---
 
-## 📖 Sobre o projeto
+## Sobre o projeto
 
-O **Cloud Box** é um sistema de armazenamento de arquivos "estilo Google Drive": o
-usuário se cadastra, faz login e pode enviar, listar, baixar, renomear e excluir
-seus próprios arquivos — tudo protegido por autenticação JWT e com os arquivos
-armazenados de verdade na nuvem (AWS S3), não em disco local.
+O **CorteSync** é a interface web de um sistema de agendamento para barbearias. Ele consome uma API REST em Spring Boot e entrega três experiências em uma única aplicação, cada uma com suas telas e permissões:
 
-O projeto foi construído em duas partes independentes que conversam via API REST:
+- **Cliente:** escolhe o barbeiro, os serviços, o dia e o horário, e acompanha ou cancela os próprios agendamentos.
+- **Barbeiro:** entra por um login próprio e vê só os atendimentos dele, atualizando o status de cada um.
+- **Administrador:** acompanha números do negócio e gerencia barbeiros, serviços e todos os agendamentos.
 
-- **Backend** — API Java/Spring Boot, responsável por autenticação, regras de
-  negócio, persistência (AWS RDS) e integração com o AWS S3.
-- **Frontend** — interface React que consome essa API, com upload por
-  drag-and-drop, tema claro/escuro e feedback visual (toasts) para cada ação.
+## Demonstração
 
-## 📸 Screenshots
+> **🔗 Acesse: [http://52.207.33.184:3000](http://52.207.33.184:3000)**
 
-<div align="center">
+- É um ambiente de demonstração (HTTP, sem certificado) e pode ficar indisponível.
+- Para testar o fluxo de cliente, crie uma conta na tela inicial.
+- As áreas de barbeiro e de administrador exigem contas específicas, criadas pelo administrador.
 
-**Register**
+## Telas
 
-<img src="docs/screenshots/register-light.png" width="48%" alt="Tela de registrar um novo usuário — tema claro" />
-<img src="docs/screenshots/register-dark.png" width="48%" alt="Tela de registrar um novo usuário — tema escuro" />
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <img src="docs/screenshots/01-login.png" alt="Tela de login do cliente" width="100%" /><br />
+      <sub><b>Login</b> — por e-mail ou telefone</sub>
+    </td>
+    <td align="center" width="50%">
+      <img src="docs/screenshots/02-criar-conta.png" alt="Tela de criação de conta" width="100%" /><br />
+      <sub><b>Criar conta</b> — formulário compacto, sem rolagem</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="docs/screenshots/03-login-barbeiro.png" alt="Tela de login do barbeiro" width="100%" /><br />
+      <sub><b>Login do barbeiro</b> — acesso próprio para profissionais</sub>
+    </td>
+    <td align="center">
+      <img src="docs/screenshots/04-inicio.png" alt="Página inicial" width="100%" /><br />
+      <sub><b>Início</b> — apresentação e acesso rápido ao agendamento</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="docs/screenshots/05-servicos.png" alt="Lista de serviços" width="100%" /><br />
+      <sub><b>Serviços</b> — cada card leva direto ao agendamento</sub>
+    </td>
+    <td align="center">
+      <img src="docs/screenshots/06-agendamento.png" alt="Agendamento em etapas" width="100%" /><br />
+      <sub><b>Agendamento</b> — 4 etapas com resumo lateral</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" colspan="2">
+      <img src="docs/screenshots/07-meus-agendamentos.png" alt="Lista de agendamentos do cliente" width="70%" /><br />
+      <sub><b>Meus agendamentos</b> — histórico com status e cancelamento</sub>
+    </td>
+  </tr>
+</table>
 
+## Funcionalidades
 
-**Login**
+### Cliente
+- Cadastro e login por **e-mail ou telefone**.
+- Lista de **serviços** ativos; clicar em um serviço leva ao agendamento.
+- **Agendamento em 4 etapas:** barbeiro → serviço(s) → data e horário → confirmação. Permite combinar mais de um serviço, mostra o valor e a duração totais e só oferece os **horários livres** do barbeiro no dia escolhido. Barbeiros inativos não aparecem.
+- **Meus agendamentos:** histórico ordenado do mais recente ao mais antigo, com status e opção de **cancelar** os confirmados.
+- **Meu perfil:** alterar nome, e-mail, telefone e senha.
 
-<img src="docs/screenshots/login-light.png" width="48%" alt="Tela de login — tema claro" />
-<img src="docs/screenshots/login-dark.png" width="48%" alt="Tela de login — tema escuro" />
+### Barbeiro
+- **Login exclusivo** em `/login-barbeiro`, acessível pelo link "Sou barbeiro" na tela de login.
+- **Meus agendamentos:** só os atendimentos dele, separados em *Hoje* e *Próximos e anteriores*.
+- Alteração do **status** direto ao lado de cada atendimento (Confirmado, Concluído).
+- Atualização da própria **foto de perfil**.
 
-**Dashboard**
+### Administrador
+- **Dashboard** com total de barbeiros e serviços, agendamentos do dia, clientes atendidos e agendamentos recentes.
+- **Barbeiros:** cadastro em passo a passo (cria a conta de acesso e o barbeiro de uma vez), ativar/inativar, editar descrição e remover.
+- **Serviços:** cadastrar, editar (nome, preço, duração, categoria), ativar/inativar e remover.
+- **Agendamentos:** lista completa, filtro por status e troca de status (Confirmado, Concluído, Cancelado).
 
-<img src="docs/screenshots/dashboard-light.png" width="48%" alt="Dashboard — tema claro" />
-<img src="docs/screenshots/dashboard-dark.png" width="48%" alt="Dashboard — tema escuro" />
+### Experiência de uso
+- Tema escuro com detalhes em dourado, pensado para o público da barbearia.
+- **Responsivo:** menu hambúrguer no celular e menu lateral deslizante no painel do admin.
+- Notificações (toasts) para sucesso e erro, estados vazios e carregamento nas listas.
+- Rotas protegidas por perfil; sessão com expiração e redirecionamento ao login quando o token deixa de valer.
 
-</div>
+## Tecnologias
 
-## ✨ Funcionalidades
+| Área | Tecnologia |
+|---|---|
+| Interface | React 19 |
+| Roteamento | React Router 7, com guards por perfil |
+| Build e desenvolvimento | Vite 8 |
+| Estilo | Tailwind CSS 4 · ícones [lucide-react](https://lucide.dev) |
+| Requisições HTTP | Axios (interceptors para o JWT e para erros) |
+| Estado global | Context API (autenticação e notificações) |
+| Qualidade de código | oxlint |
+| Entrega | Docker multi-stage (Node 20 → Nginx) |
+| Tipografia | Fraunces e Inter (Google Fonts) |
 
-- 🔐 Cadastro e login com autenticação **JWT**
-- 📤 Upload de arquivos com **drag-and-drop** e barra de progresso
-- 📁 Listagem, **renomear**, **baixar** e **excluir** arquivos
-- 🌗 Tema **claro/escuro** com persistência local
-- ⚠️ Tratamento de erros de ponta a ponta (sessão expirada, arquivo duplicado,
-  limite de tamanho excedido, credenciais inválidas)
-- 📦 Limite de upload de 50MB, validado tanto no cliente quanto no servidor
-- 🔒 Autorização por usuário em nível de rota (`@PreAuthorize`) — um usuário
-  não consegue acessar ou apagar arquivos de outro
+**Back-end consumido:** API REST em Java 21 + Spring Boot, com autenticação JWT e MySQL.
 
-## 🏗️ Arquitetura
+## Autenticação e perfis
 
-```mermaid
-flowchart LR
-    subgraph Cliente
-        A[React + Vite<br/>hospedado em S3 + CloudFront]
-    end
+1. O login devolve um **token JWT**, guardado no `localStorage` com a data de expiração.
+2. Um interceptor do Axios envia `Authorization: Bearer <token>` em toda requisição. Uma resposta `401` encerra a sessão e leva ao login.
+3. A API ainda não devolve o perfil do usuário no token, então o front decide **qual tela mostrar** assim: o administrador é reconhecido pelas variáveis `VITE_ADMIN_EMAIL` / `VITE_ADMIN_TELEFONE`, e o barbeiro pela tela de login usada (`/login-barbeiro`).
+4. Isso só afeta a navegação. **As permissões de verdade são validadas pelo back-end** (`@PreAuthorize`) em cada requisição.
 
-    subgraph AWS
-        B[Elastic Beanstalk<br/>Spring Boot API]
-        C[(RDS · MySQL<br/>metadados)]
-        D[(S3<br/>arquivos)]
-    end
+## Estrutura do projeto
 
-    A -- "HTTPS + JWT" --> B
-    B -- metadados --> C
-    B -- upload/download --> D
+```text
+.
+├── Dockerfile              # build (Node) + servidor (Nginx)
+├── nginx.conf              # fallback para index.html (React Router)
+├── .env.example            # modelo das variáveis de ambiente
+├── public/
+└── src/
+    ├── api/                # cliente Axios e chamadas por recurso
+    ├── assets/             # ilustrações
+    ├── components/
+    │   ├── booking/        # indicador de etapas e resumo do agendamento
+    │   ├── layout/         # navbar, layout do admin, guards de rota, logo
+    │   └── ui/             # Button, Input, Modal, Badge, Toggle, StatusSelect
+    ├── context/            # AuthContext e ToastContext
+    ├── pages/
+    │   ├── public/         # Início, Serviços, Login, Cadastro, Agendamento,
+    │   │                   # Meus agendamentos, Perfil, Login do barbeiro
+    │   ├── barber/         # Meus agendamentos (barbeiro)
+    │   └── admin/          # Dashboard, Barbeiros, Serviços, Agendamentos
+    └── utils/              # formatação de moeda/datas e URLs de imagens
 ```
 
-**Fluxo de autenticação:** o login retorna um JWT assinado (HS512) e o ID do
-usuário. O token é enviado em todo request subsequente via header
-`Authorization: Bearer <token>` e validado a cada chamada; o backend também
-confere, por rota, se o `idUsuario` da URL corresponde ao usuário autenticado.
+## Rotas
 
-**Fluxo de upload:** o arquivo vai direto do navegador para a API via
-`multipart/form-data`; a API valida tamanho e duplicidade, envia o binário
-para o S3 e grava os metadados (nome, tamanho, tipo MIME, data) no RDS.
+| Rota | Acesso | Descrição |
+|---|---|---|
+| `/` | Público | Redireciona para `/criar-conta` |
+| `/inicio` | Público | Página inicial |
+| `/servicos` | Público | Serviços disponíveis |
+| `/login` · `/criar-conta` | Público | Entrar e cadastrar |
+| `/login-barbeiro` | Público | Login exclusivo do barbeiro |
+| `/agendamento` | Logado | Agendamento em 4 etapas |
+| `/meus-agendamentos` | Logado | Histórico do cliente |
+| `/perfil` | Logado | Dados da conta |
+| `/barbeiro` | Barbeiro | Agenda do barbeiro |
+| `/admin` | Admin | Dashboard |
+| `/admin/barbeiros` · `/admin/servicos` · `/admin/agendamentos` | Admin | Gestão |
 
-## 🛠️ Tecnologias utilizadas
-
-### Frontend
-- **React** + **Vite** (build e bundling ultra rápido)
-- **Axios** (integração com a API REST)
-- **Tailwind CSS** (estilização responsiva, com suporte a tema claro/escuro)
-- **React Router** (navegação e rotas protegidas)
-- **react-hot-toast** (feedback visual de sucesso/erro)
-
-### Backend
-- **Java** com **Spring Boot**
-- **Spring Security** + **JWT** (autenticação e autorização)
-- **Spring Data JPA** (persistência)
-- **AWS SDK** (integração com o S3)
-
-### DevOps & Cloud
-- **AWS S3** (armazenamento de arquivos e hospedagem estática do frontend)
-- **AWS CloudFront** (CDN e terminação HTTPS para frontend e API)
-- **AWS Elastic Beanstalk** (hospedagem e gerenciamento da API)
-- **AWS RDS / MySQL** (banco de dados relacional gerenciado)
-- **Nginx** (proxy reverso e configuração de limite de upload no Beanstalk)
-
-
-## ☁️ Projeto rodando na nuvem
-[Demo ao vivo na AWS](https://d1k6x7zqjed6oi.cloudfront.net)
-
-## 🚀 Rodando localmente
+## Como executar
 
 ### Pré-requisitos
-- Node.js 18+
-- A API do Cloud Box rodando (local ou a instância na AWS)
+- **Node.js 20.19+** (ou 22.12+) e npm
+- A **API** do CorteSync em execução e acessível
 
-### Frontend
+### Instalação
 
 ```bash
-git clone <https://github.com/BrunoSlvCh/cloud-box-aws>
-cd cloud-box-frontend
-
+git clone https://github.com/BrunoSlvCh/corte-sync-application.git
+cd <corte-sync-application>
 npm install
-
-# Crie o arquivo .env a partir do exemplo (na pasta frontend)
-cp .env.example .env
-
-# O conteúdo do seu arquivo .env deve ficar assim:
-VITE_API_BASE_URL=https://dwcfv7yah7ac3.cloudfront.net
-
-npm run dev
-# abre em http://localhost:5173
 ```
 
-## 📡 Principais endpoints da API
+### Variáveis de ambiente
 
-| Método | Rota | Descrição |
+Copie o modelo e ajuste os valores:
+
+```bash
+cp .env.example .env
+```
+
+| Variável | Descrição | Exemplo |
 |---|---|---|
-| `POST` | `/v1/auth/register` | Cria uma nova conta |
-| `POST` | `/v1/auth/login` | Autentica e retorna `{ token, expireIn, id }` |
-| `POST` | `/v1/arquivos/novoArquivo/idUsuario/{id}` | Upload de arquivo (multipart) |
-| `GET` | `/v1/arquivos/idUsuario/{id}/arquivos` | Lista os arquivos do usuário |
-| `GET` | `/v1/arquivos/download/idUsuario/{id}/{nome}` | Download do arquivo |
-| `PATCH` | `/v1/arquivos/idUsuario/{id}/{nomeAtual}/para/{novoNome}` | Renomeia um arquivo |
-| `DELETE` | `/v1/arquivos/idUsuario/{id}/nome/{nome}` | Exclui um arquivo |
+| `VITE_API_BASE_URL` | URL da API, **incluindo** o prefixo `/v1` | `http://localhost:8082/v1` |
+| `VITE_ADMIN_EMAIL` | E-mail da conta de administrador | `admin@exemplo.com` |
+| `VITE_ADMIN_TELEFONE` | Telefone da conta de administrador | `11999999999` |
 
-Todas as rotas de arquivo exigem o header `Authorization: Bearer <token>` e são
-protegidas por `@PreAuthorize`, garantindo que cada usuário só acesse seus
-próprios dados.
+### Scripts
 
-## 🧠 Decisões técnicas e desafios
+```bash
+npm run dev       # servidor de desenvolvimento em http://localhost:5173
+npm run build     # gera a versão de produção em dist/
+npm run preview   # serve a build localmente
+npm run lint      # análise estática com oxlint
+```
 
-- **Autorização por dono do recurso**: cada rota de arquivo confere, via
-  `@PreAuthorize`, se o `idUsuario` da URL bate com o usuário autenticado no
-  token — evitando que um usuário acesse ou apague arquivos de outro.
-- **Sincronização de limites entre camadas**: o limite de 50MB por arquivo é
-  validado em três pontos independentes — no frontend (evita upload
-  desnecessário), no Spring (`multipart.max-file-size`) e no nginx do Elastic
-  Beanstalk (`client_max_body_size`), que fica na frente da aplicação. Ajustar
-  só o Spring não bastava, pois o proxy rejeitava a requisição antes dela
-  sequer chegar à API.
-- **Tratamento de erros consistente**: um `@RestControllerAdvice` centraliza
-  todas as exceções da API em um formato de resposta previsível, permitindo
-  que o frontend trate cada status HTTP (400, 401/403, 409, 413, 500) com uma
-  mensagem clara para o usuário, sem expor detalhes internos.
+## Docker
 
-## 🗺️ Possíveis melhorias futuras
+O `Dockerfile` usa duas etapas: compila o projeto com Node 20 e serve a pasta `dist/` com Nginx na porta 80. O `nginx.conf` envia qualquer rota desconhecida para o `index.html`, o que faz o React Router funcionar ao recarregar a página (F5) em rotas como `/perfil`.
 
-- [ ] Testes automatizados (JUnit no backend, Vitest/Testing Library no front)
-- [ ] Compartilhamento de arquivos entre usuários
-- [ ] Pré-visualização de imagens/PDFs sem precisar baixar
-- [ ] CI/CD (GitHub Actions) para deploy automático
+```bash
+docker build -t cortesync-frontend .
+docker run -d --name cortesync-frontend -p 3000:80 cortesync-frontend
+```
+
+A aplicação fica em `http://localhost:3000`. Como as variáveis são lidas no build, confirme o `.env` **antes** de rodar o `docker build`. Para forçar uma imagem do zero:
+
+```bash
+docker build --no-cache -t cortesync-frontend .
+```
+
+Com Docker Compose, o serviço do front pode ser declarado assim:
+
+```yaml
+frontend:
+  build: ./cortesync-frontend   # pasta deste projeto
+  container_name: cortesync-frontend
+  restart: always
+  ports:
+    - "3000:80"
+```
+
+## Endpoints da API utilizados
+
+Todas as rotas ficam sob o prefixo `/v1`. A coluna *Acesso* resume a regra de permissão aplicada pelo back-end.
+
+| Recurso | Método e rota | Acesso |
+|---|---|---|
+| **Autenticação** | `POST /auth/register` · `POST /auth/login` | Público |
+| **Serviços** | `GET /servico/servicos` | Logado |
+| | `POST /servico/new` | Admin |
+| | `PATCH /servico/nomeServico/{nome}/nome` · `/preco` · `/duracao` · `/categoria` | Admin |
+| | `PATCH /servico/idServico/{id}/status/{status}` | Admin |
+| | `DELETE /servico/delete/nomeServico/{nome}` | Admin |
+| **Barbeiros** | `GET /barbeiro/barbeiros` | Logado |
+| | `POST /barbeiro/new` (cria a conta e o barbeiro) | Admin |
+| | `PATCH /barbeiro/descricao/id/{id}` | Admin |
+| | `PATCH /barbeiro/id/{id}/status/{status}` | Admin |
+| | `PATCH /barbeiro/usuario/{idUsuario}/foto` | O próprio barbeiro ou Admin |
+| | `DELETE /barbeiro/delete/id/{id}` | Admin |
+| **Agendamentos** | `POST /agendamento/new` | Logado |
+| | `GET /agendamento/barbeiroId/{id}/data/{data}` (horários livres) | Logado |
+| | `GET /agendamento/agendamentos/usuario/{idUsuario}` | O próprio cliente ou Admin |
+| | `GET /agendamento/meus-agendamentos` | Barbeiro ou Admin |
+| | `GET /agendamento/all` | Admin |
+| | `PATCH /agendamento/idAgendamento/{id}/idUsuario/{idUsuario}` (cancelar) | Dono do agendamento, barbeiro do agendamento ou Admin |
+| | `PATCH /agendamento/concluir/{id}` | Barbeiro do agendamento ou Admin |
+| | `PATCH /agendamento/{id}/status` (volta para Confirmado) | Barbeiro do agendamento ou Admin |
+| **Conta** | `PATCH /user/idUsuario/{id}/alterar-nome` · `/alterar-email` · `/alterar-telefone` · `/alterar-senha` | O próprio usuário ou Admin |
+
+## Limitações conhecidas e próximos passos
+
+- [ ] Incluir o **perfil (role) no JWT** ou expor um `GET /user/me`, para o front não depender de variáveis de ambiente para reconhecer o admin.
+- [ ] Publicar com **HTTPS** e domínio próprio.
+- [ ] **Upload de fotos** dos barbeiros (hoje é informada a URL da imagem).
+- [ ] **Paginação** nas listagens de barbeiros, serviços e agendamentos.
+- [ ] Permitir que o **barbeiro cancele** atendimentos pela própria tela (depende de a listagem dele trazer o cliente do agendamento).
+- [ ] Testes automatizados.
+
+## Créditos
+
+- Fotografias de [Unsplash](https://unsplash.com), usadas sob a [licença Unsplash](https://unsplash.com/license).
+- A ilustração da fachada do dashboard foi criada para o projeto.
+- Ícones por [Lucide](https://lucide.dev); fontes Fraunces e Inter, via Google Fonts.
+
 
 ## 📄 Licença
 
 Este projeto está sob a licença MIT 
-
-## ☁️ Projeto rodando na nuvem
-[Demo ao vivo na AWS](https://d1k6x7zqjed6oi.cloudfront.net)
 
 ## 👤 Autor
 
