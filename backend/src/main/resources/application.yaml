@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: spring-boot-essentials-cloud_box
+    name: spring-boot-essentials-corte-sync
   datasource:
     url: ${DB_URL}
     username: ${DB_USERNAME}
@@ -12,8 +12,8 @@ spring:
 
   servlet:
     multipart:
-      max-file-size: 50MB
-      max-request-size: 50MB
+    max-file-size: 50MB
+    max-request-size: 50MB
   jpa:
     hibernate:
       ddl-auto: update
@@ -22,17 +22,12 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
         format_sql: true
-
-app:
-  upload:
-    dir: C:/uploads/
-
 aws:
   region: us-east-1
   s3:
     bucket-name: ${AWS_BUCKET_NAME}
-    access-key-id: ${AWS_ACCESS_KEY_ID}
-    secret-access-key: ${AWS_SECRET_KEY}
+    access-key-id: fake-access-key
+    secret-access-key: fake-access-key
 
 jwt:
   expiration: ${JWT_EXPIRATION}

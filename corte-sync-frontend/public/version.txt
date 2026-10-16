@@ -1,0 +1,6 @@
+cortesync-frontend
+base: zip enviado pelo usuario (index-Bi9k-WPR.js)
+ajustes: status-servico (interruptor), barbeiro-sem-caixa-de-erro, agendamento-mobile
+revertido: Guards, BarberLogin, Barbeiros, Dashboard, Home, Servicos publico, index.css
+bundle: index-dgmvvEQT.js
+api: http://52.207.33.184:8082/v1

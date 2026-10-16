@@ -1,0 +1,39 @@
+services:
+  frontend:
+    build: ./barbers-club-frontend  
+    container_name: barbers-club-frontend
+    restart: always
+    ports:
+      - "300:80"
+    depends_on:
+      - api
+
+  db:s
+    image: mysql:8.0
+    container_name: db
+    restart: always
+    environment:
+      MYSQL_DATABASE: barbearia_db
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  api:
+    build: .
+    container_name: spring_boot_barbearia
+    restart: always
+    ports:
+      - "8082:8082"
+    environment:
+      DB_URL: jdbc:mysql://db:3306/barbearia_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      JWT_EXPIRATION: ${JWT_EXPIRATION}
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY}
+    depends_on:
+      - db
+
+volumes:
+  mysql_data:

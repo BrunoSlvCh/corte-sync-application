@@ -10,4 +10,10 @@ public interface UsuarioRepository extends JpaRepository<UsuarioEntity, Long> {
 
     @Query("SELECT DISTINCT u FROM UsuarioEntity u LEFT JOIN FETCH u.roles WHERE u.email = :email")
     Optional<UsuarioEntity> findByEmail(String email);
+
+    @Query("SELECT DISTINCT u FROM UsuarioEntity u LEFT JOIN FETCH u.roles WHERE u.telefone = :telefone")
+    Optional<UsuarioEntity> findByTelefone(String telefone);
+
+
+
 }

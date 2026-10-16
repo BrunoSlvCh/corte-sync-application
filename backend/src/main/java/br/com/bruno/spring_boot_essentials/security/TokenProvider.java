@@ -39,7 +39,7 @@ public class TokenProvider {
     }
 
     private SecretKey getSingInKey(){
-        return Keys.hmacShaKeyFor(key.getBytes());
+        return Keys.hmacShaKeyFor(key.getBytes(java.nio.charset.StandardCharsets.UTF_8));
     }
 
     private Claims getClaims (String token){

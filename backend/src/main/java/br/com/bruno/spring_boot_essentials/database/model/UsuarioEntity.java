@@ -13,7 +13,6 @@ import java.util.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@ToString(exclude = {"arquivos", "roles"})
 @Table(name = "tb_usuarios")
 @Entity
 
@@ -27,6 +26,8 @@ public class UsuarioEntity implements UserDetails {
     private String nome;
     @Column(nullable = false, unique = true)
     private String email;
+    @Column(nullable = false, unique = true)
+    private String telefone;
     @Column(nullable = false)
     private String senha;
 
@@ -71,10 +72,10 @@ public class UsuarioEntity implements UserDetails {
         return UserDetails.super.isEnabled();
     }
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
-    private List<ArquivoEntity> arquivos = new ArrayList<>();
+    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private BarbeiroEntity barbeiro;
 
-    public String get() {
-        return null;
-    }
+    @OneToMany(mappedBy = "usuario")
+    private List<AgendamentoEntity> agendamentos = new ArrayList<>();
+
 }

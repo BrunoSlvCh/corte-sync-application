@@ -88,6 +88,13 @@
 			<scope>runtime</scope>
 		</dependency>
 
+		<!-- H2 no classpath -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
 		<!-- DEPENDÊNCIA AWS -->
 		<dependency>
 			<groupId>software.amazon.awssdk</groupId>
